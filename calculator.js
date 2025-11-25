@@ -1,7 +1,19 @@
 const prompt = require("prompt-sync")()
-const num1 = parseFloat(prompt("Enter 1st number "))
-const num2 = parseFloat(prompt("Enter 2nd number "))
-const sign = prompt("Enter sign ")
+
+function getNum(numString){
+    while(true){
+        const num = parseFloat(prompt("Enter number " + numString + ": "));
+        if (isNaN(num)) {
+            console.log("Invalid Input");
+        } else {
+            return num;
+        }
+    }
+}
+
+const num1 = getNum('One');
+const num2 = getNum('Two');
+const sign = prompt("Enter sign: ");
 
 let result = 0;
 let valid = true;
@@ -17,12 +29,16 @@ switch (sign) {
         break;
     case "/":
         result = num1 / num2;
+        if (num2 === 0) {
+            valid = false;
+            console.log("Zero division error.");
+        }
         break;
     case "%":
         result = num1 % num2;
         break;
     default:
-        console.log("Invalid input");
+        console.log("Invalid");
         valid = false;
         break;
 }
